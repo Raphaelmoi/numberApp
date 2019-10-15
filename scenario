@@ -1,0 +1,79 @@
+Titre : 
+
+
+Commencer sans possibilité d'avoir un compte
+
+
+
+Apprendre à lire les chiffres dans differentes langues
+base maya chinois corren aztreque
+
+a premiere ouverture, tutoriel en pop up
+
+en haut menu permettant de revoir tuto à tout moment
++ une vignette photo user -> lien vers le profil -> inscription si pas inscrit, pas connecté -> permettre inscription google facebook
+
+contenu accueil : 
+
+tant que aucun langage n'est choisi, une vue propose une liste des langues que l'on peut apprendre-> user en choisit un
+---> il pourra en ajouter/supprimer les exercices pourront combiner toustes ces ecritures
+-----> btn commencer on demarre un exercice simple de 10? questions
+
+
+|---> systéme de fiche -> une fiche montre en gros le numéro en dessous optionnelement prononciation en petit gros la valeur en chiffre romain -> accesoirement petit texte , légende 
+
+-> AU tout debut on montre 3 fiches (0, 1, 2 ?) -> puis fiche  exercice
+	--> on voit une fiche avec un des chiffres précedemment vus 
+	l'utilisateur inscrit sa réponse -> pas d'indice ou alors sur demande
+	-> si la réponse est mauvaise on remontrre fiche appprentissage concernée
+	-> si bonne réponse on continu, dd'autres questions est progréssivement de nouvelle fiches
+			--> Determiner un systéme de progression , par exemple quand l'utilisateur  commence a apprendre des chiffres complexe il ne voit plus trop les premières fiches (ex 1, 2)
+
+
+FICHES EXERCICES:
+
+	EN haut le numéro en chinois, en bas un pad et un input on on entre notre réponse
+	en haut le numéro en romain plusieurs réponses dont une correct dans langues apprise
+	Un canvas ou l'utilisatuer execute le dessin du chiffre demandé 
+		->il determinera lui meme si sa réponse est correct ou non selon le résultat qui sera montré après validation (en tous cas pour le moment, idéalement on arrrive a identifier ce que l'utilisateur a voulu dessiner et si ca ressemble suffisament au résultat attendu)
+
+	-> Au plus haut niveau l'utilsateur devra répondre a une addition plus ou moins simple,
+	si possible avec les caracthéres mathématiques de la lnague 
+	réponse en choix multiple dans la langues apprise
+	ou réponse en char romain -> choix multiple si chrono? 
+
+
+MODE EXAM
+ 	Chrono
+ 	pas de dessin
+ 	-> ex 30 sec par questions
+ 		si mauvaise réponse on perd une vie
+ 		3 vies en tous
+ 		100 questions
+ 		--> plus on va vite plus on ramasse de points
+
+
+
+ETAPE 1 : 
+pour deux langues, proposé le système de carte
+	faire les carte apprentissage
+	les cartes exercices
+
+	et le systéme exercice
+
+
+
+Crrer une sorte de ficchier json
+
+exemple
+
+maya = {
+	nameOfLanguage : 'maya',
+	description : '',
+	chiffres : {
+		0 : 'url to corresponding image'
+		1 : 'url to corresponding image'
+		...
+	}
+
+}
