@@ -25,12 +25,7 @@
  	DebugInstructions,
  	ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
-
-//import Home from './Components/Home';
 import Navigation from './Navigation/Navigation'
-
-
-
 
  const App: () => React$Node = () => {
  	return (
