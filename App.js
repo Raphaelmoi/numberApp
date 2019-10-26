@@ -1,45 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from 'react';
+import Navigation from './Navigation/Navigation';
+import {Provider} from 'react-redux';
+import Store from './Store/configureStore';
+import {persistStore} from 'redux-persist';
+import {PersistGate} from 'redux-persist/es/integration/react';
 
- import React from 'react';
- import {
- 	SafeAreaView,
- 	StyleSheet,
- 	ScrollView,
- 	View,
- 	Text,
- 	StatusBar,
- 	TouchableOpacity,
- 	Image,
- } from 'react-native';
-
- import {
- 	Header,
- 	LearnMoreLinks,
- 	Colors,
- 	DebugInstructions,
- 	ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
-import Navigation from './Navigation/Navigation'
-
- const App: () => React$Node = () => {
- 	return (
- 		<>
- 		<StatusBar barStyle="dark-content" />
- 			<Navigation /> 			
- 		</>
- 		);
- 	};
-
- 	const styles = StyleSheet.create({
- 		scrollView: {
- 			backgroundColor: Colors.lighter,
- 		}
- 	});
-
- 	export default App;
+export default class App extends React.Component {
+  render() {
+    let persistor = persistStore(Store);
+    return (
+      <Provider store={Store}>
+        <PersistGate persistor={persistor}>
+          <Navigation />
+        </PersistGate>
+      </Provider>
+    );
+  }
+}

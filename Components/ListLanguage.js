@@ -1,41 +1,34 @@
 // Components/FilmList.js
 
 import React from 'react';
-import { Text, StyleSheet, FlatList} from 'react-native';
+import {Text, StyleSheet, FlatList} from 'react-native';
 import LanguageItem from './LanguageItem';
+import { red } from 'ansi-colors';
 
 class ListLanguage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-    }
-
-    render() {
-        return (
-            <FlatList
-            horizontal
-            style={styles.list}
-            data={this.props.data}
-            renderItem={({item}) => (
-                <LanguageItem
-                language={item}
-                toggleInfoView = { this.props.toggleInfoView }
-
-                />
-            )}
-            keyExtractor={item => item.id}
-            />            
-        )
-    }
+  render() {
+    return (
+      <FlatList
+        horizontal
+        data={this.props.data}
+        renderItem={({item}) => (
+          <LanguageItem
+            language={item}
+            toggleInfoView={this.props.toggleInfoView}
+          />
+        )}
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    list: {
-      flex: 1
-  }
-})
-
+});
 
 export default ListLanguage;
+

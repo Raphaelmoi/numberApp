@@ -1,120 +1,89 @@
 // Components/Home.js
-
-import React from 'react'
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, TouchableOpacity, Image, Button,} from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import ListLanguage from './ListLanguage';
-import data from '../Data/Data';
-
+import React from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableHighlight,
+  Modal,
+  StyleSheet,
+} from 'react-native';
+import MyModal from '../Components/MyModal';
+import ReturnStorage from './ReturnStorage';
+import {connect} from 'react-redux';
 
 class Home extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state ={
-      clickedItem:0
-    }
-
-    this.toggleInfoView = this.toggleInfoView.bind(this)
+    this.state = {
+      modalVisible: false,
+    };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-
-  toggleInfoView(id) {
-    if (this.state.clickedItem == id) {
-      id = 0;
-    }
+  toggleModal() {
     this.setState({
-      clickedItem:id
+      modalVisible: !this.state.modalVisible,
     });
+    return;
   }
 
-    _showInfos(){
-        if (this.state.clickedItem != 0){
-            return (
-                <View>
-                    <Text> Compter en { data[this.state.clickedItem-1].name }</Text>
-                    <Text >
-                        Donnees qques infos sur la langues 
-                        et mentionner quils pourront en choisir d'autre après    
-                    </Text>
-                    <Button style={styles.button} 
-                    title= 'cest parti'
-                    onPress={() => this.props.navigation.navigate('Quiz')}
-                    />
-                </View>
-            )
-        }
-    }   
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
+  onStart() {
+    if (this.props.languageList === undefined) {
+      this.state.modalVisible = true;
+    }
+  }
+
+  displayModal() {
+    return (
+      <Modal
+        animationType="fade"
+        transparent={false}
+        visible={this.state.modalVisible}>
+        <MyModal toggleModal={this.toggleModal} />
+      </Modal>
+    );
+  }
 
   render() {
     return (
       <SafeAreaView>
+        {this.onStart()}
+        {this.displayModal()}
 
+        <TouchableHighlight
+          style={styles.btnModal}
+          onPress={() => {
+            this.toggleModal();
+            this.displayModal();
+          }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
         <View>
-          <Text style={styles.MainTitle}>
-            Dans quelle langue souhaitez vous apprendre à compter en premier ?
-          </Text>
+          <ReturnStorage />
         </View>
-
-          <View style={styles.boxAllLanguages}>
-            <ListLanguage
-              data={ data }
-              toggleInfoView = { this.toggleInfoView }
-             />
-          </View>
-
-        <View>
-          {this._showInfos()}
-        </View>
-
-    </SafeAreaView>
-     
-    )
+      </SafeAreaView>
+    );
   }
 }
 
 const styles = StyleSheet.create({
+  btnModal: {
+    width: 100,
+    padding: 10,
+    margin: 10,
+    backgroundColor: '#DDD',
+  },
+});
 
-    MainTitle : {
-      fontSize : 24,
-      textAlign : 'center',
-      borderRadius: 1,
-        borderWidth: 3,
-        borderColor: '#d6d7da',
-        margin : 10,
-    },
-    boxAllLanguages :{
-      flexDirection : 'row',
-    },
-    
-    chinois: {
-      marginTop: 8,
-      fontSize: 18,
-      fontWeight: '400',
-      fontFamily: "MaShanZheng-Regular",
-    },
-    symboleAsImg :{
-      width : 120,
-      height : 120,
-      fontSize : 80,
-      textAlign : 'center',
-      alignItems : 'center',
-      backgroundColor : '#EEE',
-      borderRadius: 60,
-        borderWidth: 3,
-        borderColor: 'red',
-    },
-    image :{
-      width : 120,
-      height : 120,
-    },
-    title_text : {
-      textAlign : 'center',
-      fontSize: 24,
-
-    }
-
-  });
-
-export default Home
+// export default Home;
+const mapStateToProps = state => {
+  return {
+    languageList: state.selectedLanguageId.languageList,
+  };
+};
+export default connect(mapStateToProps)(Home);
