@@ -20,22 +20,18 @@ class Home extends React.Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
-
+  componentDidMount() {
+    // if no language found on storage set modal visible
+    if (this.props.languageList === undefined) {
+      this.state.modalVisible = true;
+    }
+  }
+  // change state of modal visible or not
   toggleModal() {
     this.setState({
       modalVisible: !this.state.modalVisible,
     });
     return;
-  }
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
-  onStart() {
-    if (this.props.languageList === undefined) {
-      this.state.modalVisible = true;
-    }
   }
 
   displayModal() {
@@ -52,9 +48,7 @@ class Home extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        {this.onStart()}
         {this.displayModal()}
-
         <TouchableHighlight
           style={styles.btnModal}
           onPress={() => {
@@ -63,9 +57,11 @@ class Home extends React.Component {
           }}>
           <Text>Show Modal</Text>
         </TouchableHighlight>
+        
         <View>
-          <ReturnStorage />
+          <ReturnStorage navigate={this.props.navigation.navigate} />
         </View>
+
       </SafeAreaView>
     );
   }

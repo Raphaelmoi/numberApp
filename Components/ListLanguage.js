@@ -1,9 +1,8 @@
-// Components/FilmList.js
+// Components/ListLanguage.js
 
 import React from 'react';
 import {Text, StyleSheet, FlatList} from 'react-native';
 import LanguageItem from './LanguageItem';
-import { red } from 'ansi-colors';
 
 class ListLanguage extends React.Component {
   constructor(props) {

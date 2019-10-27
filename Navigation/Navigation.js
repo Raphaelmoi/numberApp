@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../Components/Home';
 import Quiz from '../Components/Quiz';
+import NumberList from '../Components/Details/NumberList';
 
 const MainNavigator = createStackNavigator({
   Home: {
@@ -16,6 +17,12 @@ const MainNavigator = createStackNavigator({
       title: 'Quiz',
     },
   },
+  Details: {
+    screen: NumberList,
+    navigationOptions: {
+      title: 'Details',
+    },
+  }
 });
 
 const Nav = createAppContainer(MainNavigator);
